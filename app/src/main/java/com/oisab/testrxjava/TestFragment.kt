@@ -24,13 +24,13 @@ class TestFragment : Fragment(R.layout.test_fragment) {
 
         disposeBag.add(generateStudents()
             .zipWith(generateClasses(),
-                { t, u ->
-                    val items: MutableList<CellModel> = ArrayList()
-                    for ((schoolClasses, students) in t) {                // проход по ключам ассоциативного массива
-                        if (schoolClasses in u) {                        // если текущий ключ содержится в списке классов
-                            items.add(CellModel(schoolClasses))         // добавить в список ключ - название класса
-                            for (student in students) {                // добавить в список всех студентов класса
-                                items.add(CellModel(student))
+                { studentsMap, classesArray ->
+                    val items: MutableList<BaseCell> = ArrayList()
+                    for ((schoolClasses, students) in studentsMap) {     // проход по ключам ассоциативного массива
+                        if (schoolClasses in classesArray) {            // если текущий ключ содержится в списке классов
+                            items.add(CellClass(schoolClasses))        // добавить в список ключ - название класса
+                            for (student in students) {               // добавить в список всех студентов класса
+                                items.add(CellStudent(student))
                             }
                         }
                     }
